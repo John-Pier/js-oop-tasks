@@ -24,6 +24,10 @@ describe('ООП', () => {
             assert.strictEqual(point.x, 1);
             assert.strictEqual(point.y, 0);
         });
+        it('Метод возвращает расстояние от точки до центра координат (0, 0)', () => {
+            const point = new core.Point(3, 4);
+            assert.strictEqual(point.distanceToCenter(), 5);
+        });
     });
 
     describe('#Point3D', () => {
@@ -58,20 +62,26 @@ describe('ООП', () => {
     describe('#Queue', () => {
         it('проверка массивом', () => {
             const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
+            queue.enqueue(1);
+            queue.enqueue(2);
+            queue.enqueue(3);
+
+            assert.strictEqual(queue.dequeue(), 1);
+            assert.strictEqual(queue.dequeue(), 2);
+            assert.strictEqual(queue.dequeue(), 3);
+            assert.strictEqual(queue.isEmpty(), true);
         });
 
         it('проверка на пограничные случаи', () => {
             const queue = new core.Queue();
-            // TODO:
-            assert.strictEqual(true, true);
+            assert.strictEqual(queue.isEmpty(), true);
+            assert.strictEqual(queue.dequeue(), undefined);
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,2,3,5]);
-            // TODO:
-            assert.strictEqual(true, true);
+            const queue = new core.Queue([1, 2, 3, 5]);
+            assert.strictEqual(queue.dequeue(), 1);
+            assert.strictEqual(queue.size(), 3);
         });
     });
 });
