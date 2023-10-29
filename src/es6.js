@@ -1,34 +1,61 @@
 "use strict";
-// в данных задачах нужно использовать возможности es6
-// ко всем заданиям можно дописать свои тесты в файле es6.spec.js
-// Можно менять параметры функций (например сделать им значения по умолчанию)
 
-// Напишите функцию, которая принимает ФИО пользователя и возвращает
-// строку формата Имя Фамилия
-function fioToName(fio) {}
+// Функция преобразования ФИО в строку формата "Имя Фамилия"
+function fioToName(fio) {
+  const [surname, name] = fio.split(' ').slice(0, 2);
+  return `${name} ${surname}`;
+}
 
-// преобразуйте массив чисел так, чтобы в нем остались только
-// уникальные элементы
-// присмотритесь к коллекции "Set"
-function filterUnique(array) {}
+// Преобразование массива чисел, оставляя только уникальные элементы
+function filterUnique(array) {
+  return [...new Set(array)];
+}
 
-// Задача: разница зарплат
-// в функцию приходит массив из n зарплат сотрудников фирмы
-// ваша задача определить, во сколько раз зарплата самого высокооплачиваемого
-// сотрудника превышает зарплату самого низкооплачиваемого
-// присмотритесь к методу .reduce
-function calculateSalaryDifference(array) {}
+// Определение во сколько раз зарплата самого высокооплачиваемого сотрудника
+// превышает зарплату самого низкооплачиваемого
+function calculateSalaryDifference(array) {
+  if (array.length === 0) return 0;
 
-// Реализуйте класс "словарь слов" (как толковый словарь)
-// класс должен быть безопасным и работать только со словами
-// присмотритесь к коллекции "Map"
-// Словарь - (string, string), и все это не null и не undefined
-// * покройте класс тестами
-class Dictionary {}
+  const maxSalary = array.reduce((max, salary) => Math.max(max, salary), array[0]);
+  const minSalary = array.reduce((min, salary) => Math.min(min, salary), array[0]);
+
+  return maxSalary / minSalary;
+}
+
+// Класс "словарь слов"
+class Dictionary {
+  constructor() {
+    this.words = new Map();
+  }
+
+  addWord(word, definition) {
+    if (typeof word === 'string' && typeof definition === 'string') {
+      this.words.set(word, definition);
+    } else {
+      throw new Error('Both word and definition should be strings');
+    }
+  }
+
+  getDefinition(word) {
+    return this.words.get(word);
+  }
+
+  deleteWord(word) {
+    this.words.delete(word);
+  }
+
+  getWords() {
+    return Array.from(this.words.keys());
+  }
+
+  clearDictionary() {
+    this.words.clear();
+  }
+}
 
 module.exports = {
-    fioToName,
-    filterUnique,
-    Dictionary,
-    calculateSalaryDifference
+  fioToName,
+  filterUnique,
+  Dictionary,
+  calculateSalaryDifference
 };
