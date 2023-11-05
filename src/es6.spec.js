@@ -40,8 +40,21 @@ describe('es6', () => {
         it('экземпляр класса создается', () => {
             const dic = new core.Dictionary();
 
-            // TODO
             assert.strictEqual(!!dic, true);
         });
+
+        it('не добавляет не строку', () => {
+            const dic = new core.Dictionary();
+
+            assert.throws(dic.set.bind(dic, 12), /Invalid argument type$/);
+        })
+
+        //не понимаю как разделить, пусть будет так
+        it('добавляет слово и получает слово', () => {
+            const dic = new core.Dictionary();
+            dic.set("1", "один")
+
+            assert.strictEqual(dic.get("1"), "один");
+        })
     });
 });
