@@ -24,6 +24,12 @@ describe('ООП', () => {
             assert.strictEqual(point.x, 1);
             assert.strictEqual(point.y, 0);
         });
+
+        it('получает валидное расстояние от центра', () => {
+            const point = new core.Point(3, 4);
+
+            assert.strictEqual(point.getDistanceFromCenter(), 5);
+        })
     });
 
     describe('#Point3D', () => {
@@ -56,13 +62,13 @@ describe('ООП', () => {
     });
 
     describe('#Queue', () => {
-        it('проверка массивом', () => {
+        it('проверка массивом', () => { //???
             const queue = new core.Queue();
             // TODO:
             assert.strictEqual(true, true);
         });
 
-        it('проверка на пограничные случаи', () => {
+        it('проверка на пограничные случаи', () => { //???
             const queue = new core.Queue();
             // TODO:
             assert.strictEqual(true, true);
@@ -71,7 +77,7 @@ describe('ООП', () => {
         it('может создаться из массива', () => {
             const queue = new core.Queue([1,2,3,5]);
             // TODO:
-            assert.strictEqual(true, true);
+            assert.deepStrictEqual(queue.queue, [1,2,3,5]);
         });
     });
 });
