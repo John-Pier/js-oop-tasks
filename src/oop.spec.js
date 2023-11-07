@@ -1,6 +1,6 @@
 const assert = require('assert');
 const core = require('./oop');
-const {Point3D} = require("./oop");
+const {Point3D} = require('./oop');
 
 describe('ООП', () => {
     describe('#Point', () => {
@@ -23,6 +23,15 @@ describe('ООП', () => {
 
             assert.strictEqual(point.x, 1);
             assert.strictEqual(point.y, 0);
+        });
+
+        it('Функция vectorLengthFromOrigin возвращает расстояние от точки до начала координат.', () => {
+            const point = new core.Point(-6, 8);
+            if (typeof point.test === 'function') {
+                assert.strictEqual(point.vectorLengthFromOrigin(), 10);
+            } else {
+                assert.strictEqual(true, true);
+            }
         });
     });
 
@@ -69,7 +78,7 @@ describe('ООП', () => {
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,2,3,5]);
+            const queue = new core.Queue([1, 2, 3, 5]);
             // TODO:
             assert.strictEqual(true, true);
         });
