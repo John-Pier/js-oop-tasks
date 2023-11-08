@@ -39,9 +39,35 @@ describe('es6', () => {
     describe('#Dictionary', () => {
         it('экземпляр класса создается', () => {
             const dic = new core.Dictionary();
-
-            // TODO
             assert.strictEqual(!!dic, true);
         });
-    });
+    
+        it('можно добавить и получить слово из словаря', () => {
+            const dic = new core.Dictionary();
+            dic.addWord('apple', 'яблоко');
+            assert.strictEqual(dic.getWord('apple'), 'яблоко');
+        });
+    
+        it('попытка получения слова, которого нет в словаре, возвращает undefined', () => {
+            const dic = new core.Dictionary();
+            assert.strictEqual(dic.getWord('nonexistent'), undefined);
+        });
+    
+        it('можно удалить слово из словаря', () => {
+            const dic = new core.Dictionary();
+            dic.addWord('car', 'автомобиль');
+            dic.deleteWord('car');
+            assert.strictEqual(dic.getWord('car'), undefined);
+        });
+    
+        it('попытка добавления некорректных ключей и значений вызывает ошибку', () => {
+            const dic = new core.Dictionary();
+            assert.throws(() => {
+                dic.addWord(123, 'яблоко');
+            }, Error);
+            assert.throws(() => {
+                dic.addWord('apple', 123);
+            }, Error);
+        });
+    });    
 });
