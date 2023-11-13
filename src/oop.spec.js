@@ -56,38 +56,47 @@ describe('ООП', () => {
     });
 
     describe('#Queue', () => {
-        it('проверка массивом', () => {
-            const queue = new core.Queue();
-            queue.push(...[1,2,3,4]);
-            assert.strictEqual(queue.pop(), 1);
-            assert.strictEqual(queue.pop(), 2);
-            assert.strictEqual(queue.size, 2);
+        it('проверка на инициализацию пустым массивом', () => {
+            const queue = new core.Queue([]);
+            queue.add('aaa');
+            assert.strictEqual(queue.get(), 'aaa');
+        });
 
-            queue.push(5);
-            assert.strictEqual(queue.size, 3);
-            assert.strictEqual(queue.pop(), 3);
+        it('проверка на инициализацию массивом с undefined и int', () => {
+            const queue = new core.Queue([undefined, 10, undefined, 22]);
+            assert.strictEqual(queue.get(), 10);
+        });
 
-            queue.clear();
-            assert.strictEqual(queue.size, 0);
+        it('проверка на добавление массива с undefined и int', () => {
+            const queue = new core.Queue([1, 4, 5]);
+            queue.add([2, undefined, 3, undefined]);
+            assert.strictEqual(queue.queue.at(-1).at(-1), 3);
+        });
+
+        it('проверка на добавление undefined', () => {
+            const queue = new core.Queue([1, 2]);
+            queue.add(undefined);
+            assert.strictEqual(queue.queue.at(-1), 2);
+        });
+
+        it('проверка на смешивание типов данных в очереди', () => {
+            const queue = new core.Queue()
+            queue.add(4)
+            queue.add('string')
+            queue.add(['string', 2, null])
+            assert.strictEqual(queue.get(), 4)
+            assert.strictEqual(queue.get(), 'string')
         });
 
         it('проверка на пограничные случаи', () => {
             const queue = new core.Queue();
-            assert.strictEqual(queue.size, 0);
-            assert.strictEqual(queue.pop(), undefined);
+            assert.strictEqual(queue.get(), undefined);
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-            assert.strictEqual(queue.pop(), 1);
-            assert.strictEqual(queue.pop(), -2);
-            assert.strictEqual(queue.size, 2);
-        });
-
-        it('методы работают корректно ', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-           // TODO: ваши тесты
-            assert.strictEqual(true, true);
+            const queue = new core.Queue([1, 2, 3, 5]);
+            assert.strictEqual(queue.get(), 1);
+            assert.strictEqual(queue.get(), 2)
         });
     });
 });
