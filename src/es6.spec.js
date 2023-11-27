@@ -43,5 +43,22 @@ describe('es6', () => {
             // TODO
             assert.strictEqual(!!dic, true);
         });
+	it('добавление и получение слов', () => {
+            const dic = new core.Dictionary();
+            dic.addWord('apple', 'яблоко');
+            assert.strictEqual(dic.getDefinition('apple'), 'яблоко');
+        });
+
+        it('удаление слова', () => {
+            const dic = new core.Dictionary();
+            dic.addWord('apple', 'яблоко');
+            dic.removeWord('apple');
+            assert.strictEqual(dic.getDefinition('apple'), undefined);
+        });
+
+        it('попытка добавить нестроковое слово вызывает ошибку', () => {
+            const dic = new core.Dictionary();
+            assert.throws(() => dic.addWord(42, 'number'), Error);
+        });
     });
 });
