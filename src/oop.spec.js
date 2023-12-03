@@ -58,7 +58,7 @@ describe('ООП', () => {
     describe('#Queue', () => {
         it('проверка массивом', () => {
             const queue = new core.Queue();
-            queue.push(...[1,2,3,4]);
+            queue.push(...[1, 2, 3, 4]);
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), 2);
             assert.strictEqual(queue.size, 2);
@@ -78,16 +78,41 @@ describe('ООП', () => {
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,-2,3,5]);
+            const queue = new core.Queue([1, -2, 3, 5]);
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), -2);
             assert.strictEqual(queue.size, 2);
         });
 
         it('методы работают корректно ', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-           // TODO: ваши тесты
+            const queue = new core.Queue([1, -2, 3, 5]);
+            it('проверка метода size() ', () => {
+                expect(queue.size).toBe(4);
+            });
+            it('проверка метода pop() ', () => {
+                queue.pop();
+                queue.pop();
+                assert.strictEqual(queue.size(), 2);
+            });
+            it('проверка метода push() ', () => {
+                queue.push(8);
+                expect(queue.items).toEqual([3, 5, 8]);
+                queue.push(-10);
+                assert.strictEqual(queue.size(), 4);
+            });
+            
+
+            it('проверка метода clear() ', () => {
+                queue.clear();
+                expect(queue.items).toEqual([]);
+            });
+            
             assert.strictEqual(true, true);
         });
+
+        
     });
 });
+
+    
+
