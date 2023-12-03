@@ -37,11 +37,32 @@ describe('es6', () => {
     });
 
     describe('#Dictionary', () => {
+
         it('экземпляр класса создается', () => {
             const dic = new core.Dictionary();
 
             // TODO
             assert.strictEqual(!!dic, true);
         });
+
+        it('добавление слова и определения', () => {
+
+            const dic = new core.Dictionary();
+            dic.addWord('apple', 'a fruit');
+
+            assert.equal(dic.getDefinition('apple'), 'a fruit');
+        });
+
+        it('удаление слова', () => {
+            const dic = new core.Dictionary();
+            dic.addWord('apple', 'a fruit');
+
+            assert.equal(dic.getDefinition('apple'), 'a fruit');
+            //dic.addWord('aple', 'a frit');
+            dic.removeWord('apple');
+
+            assert.equal(dic.getDefinition('apple'), undefined);
+        });
+           
     });
 });
