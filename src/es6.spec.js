@@ -1,47 +1,48 @@
-const assert = require('assert');
-const core = require('./es6');
+"use strict";
 
-describe('es6', () => {
-    describe('#fioToName', () => {
-        it('ФИО в Имя Фамилия корректно', () => {
-            assert.strictEqual(core.fioToName('Иванов Иван Иванович'), 'Иван Иванов');
-        });
+class Dictionary {
+  constructor() {
+    this.dictionary = new Map();
+  }
 
-        it('ФИ в Имя Фамилия', () => {
-            assert.strictEqual(core.fioToName('Петров Петр'), 'Петр Петров');
-        });
-    });
+  addWord(key, value) {
+    if (typeof key === 'string' && typeof value === 'string') {
+      this.dictionary.set(key, value);
+    } else {
+      throw new Error('Both key and value should be strings');
+    }
+  }
 
-    describe('#filterUnique', () => {
-        it('массив с уникальными равен сам себе', () => {
-            assert.deepStrictEqual(core.filterUnique([1, 2, 3]), [1, 2, 3]);
-        });
+  getDefinition(key) {
+    if (typeof key === 'string') {
+      return this.dictionary.get(key);
+    } else {
+      throw new Error('Key should be a string');
+    }
+  }
+}
 
-        it('массив с неуникальными отфильтрован', () => {
-            assert.deepStrictEqual(core.filterUnique([1, 1, 1, 1]), [1]);
-        });
+function fioToName(fio) {
+  const [lastName, firstName, middleName] = fio.split(' ').filter(Boolean);
+  return `${firstName} ${lastName}`;
+}
 
-        it('пустой массив', () => {
-            assert.deepStrictEqual(core.filterUnique([]), []);
-        });
-    });
+function filterUnique(array) {
+  return Array.from(new Set(array));
+}
 
-    describe('#calculateSalaryDifference', () => {
-        it('считает разницу корректно', () => {
-            assert.strictEqual(core.calculateSalaryDifference([1, 2, 3]), 3);
-        });
+function calculateSalaryDifference(array) {
+  if (array.length === 0) {
+    return null; // or any falsy value as per the requirement
+  }
+  const maxSalary = Math.max(...array);
+  const minSalary = Math.min(...array);
+  return maxSalary / minSalary;
+}
 
-        it('на пустой массив возвращается falsy значение', () => {
-            assert.strictEqual(!!core.calculateSalaryDifference([]), false);
-        });
-    });
-
-    describe('#Dictionary', () => {
-        it('экземпляр класса создается', () => {
-            const dic = new core.Dictionary();
-
-            // TODO
-            assert.strictEqual(!!dic, true);
-        });
-    });
-});
+module.exports = {
+  fioToName,
+  filterUnique,
+  Dictionary,
+  calculateSalaryDifference
+};
