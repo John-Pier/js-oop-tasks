@@ -40,30 +40,6 @@ class Dictionary {
         }
         return false;
     }
-
-    hasKey(key) {
-        return key in this.entries;
-    }
-
-    getValue(key) {
-        return this.entries[key];
-    }
-
-    getKeys() {
-        return Object.keys(this.entries);
-    }
-
-    getValues() {
-        return Object.values(this.entries);
-    }
-
-    getCount() {
-        return Object.keys(this.entries).length;
-    }
-
-    clear() {
-        this.entries = {};
-    }
 }
 
 
