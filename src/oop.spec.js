@@ -88,6 +88,13 @@ describe('ООП', () => {
             const queue = new core.Queue([1,-2,3,5]);
            // TODO: ваши тесты
             assert.strictEqual(true, true);
+            queue.push(6, 7);
+            assert.strictEqual(queue.size, 6);
+            assert.strictEqual(queue.pop(), 1);
+            assert.strictEqual(queue.pop(), -2);
+
+            queue.clear();
+            assert.strictEqual(queue.size, 0);
         });
         it('pop() возвращает undefined для пустой очереди', () => {
             const queue = new core.Queue();
