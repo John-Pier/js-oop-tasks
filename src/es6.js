@@ -24,7 +24,48 @@ function calculateSalaryDifference(array) {
     return maxSalary / minSalary;
 }
 
-class Dictionary {}
+class Dictionary {
+    constructor() {
+        this.entries = {};
+    }
+
+    add(key, value) {
+        this.entries[key] = value;
+    }
+
+    remove(key) {
+        if (this.hasKey(key)) {
+            delete this.entries[key];
+            return true;
+        }
+        return false;
+    }
+
+    hasKey(key) {
+        return key in this.entries;
+    }
+
+    getValue(key) {
+        return this.entries[key];
+    }
+
+    getKeys() {
+        return Object.keys(this.entries);
+    }
+
+    getValues() {
+        return Object.values(this.entries);
+    }
+
+    getCount() {
+        return Object.keys(this.entries).length;
+    }
+
+    clear() {
+        this.entries = {};
+    }
+}
+
 
 module.exports = {
     fioToName,
