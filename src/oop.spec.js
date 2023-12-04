@@ -89,5 +89,14 @@ describe('ООП', () => {
            // TODO: ваши тесты
             assert.strictEqual(true, true);
         });
+        it('pop() возвращает undefined для пустой очереди', () => {
+            const queue = new core.Queue();
+            assert.strictEqual(queue.pop(), undefined);
+        });
+
+        it('очередь создается пустой, размер равен 0', () => {
+            const queue = new core.Queue();
+            assert.strictEqual(queue.size, 0);
+        });
     });
 });
