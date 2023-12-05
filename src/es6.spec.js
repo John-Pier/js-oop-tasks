@@ -44,4 +44,14 @@ describe('es6', () => {
             assert.strictEqual(!!dic, true);
         });
     });
+
+    describe('#Dictionary', () => {
+        it('экземпляр класса не является null или undefined', () => {
+            const dic = new core.Dictionary();
+    
+            assert.notStrictEqual(dic, null);
+            assert.notStrictEqual(dic, undefined);
+        });
+    });
+    
 });
