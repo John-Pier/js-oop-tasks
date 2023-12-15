@@ -39,7 +39,22 @@ describe('es6', () => {
     describe('#Dictionary', () => {
         it('экземпляр класса создается', () => {
             const dic = new core.Dictionary();
+        });
+        it('добавление элемента в словарь', () => {
+            const dic = new core.Dictionary();
+            dic.add('key1', 'value1');
+            assert.strictEqual(dic.hasKey('key1'), true);
+            assert.strictEqual(dic.getValue('key1'), 'value1');
+        });
 
+        it('удаление элемента из словаря', () => {
+            const dic = new core.Dictionary();
+            dic.add('key1', 'value1');
+            dic.add('key2', 'value2');
+            assert.strictEqual(dic.remove('key1'), true);
+            assert.strictEqual(dic.hasKey('key1'), false);
+            assert.strictEqual(dic.hasKey('key2'), true);
+        });
             // TODO
             assert.strictEqual(!!dic, true);
         });
