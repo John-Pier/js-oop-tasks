@@ -38,10 +38,38 @@ describe('es6', () => {
 
     describe('#Dictionary', () => {
         it('экземпляр класса создается', () => {
-            const dic = new core.Dictionary();
+            const dictionary = new core.Dictionary();
 
-            // TODO
-            assert.strictEqual(!!dic, true);
+            assert.strictEqual(!!dictionary, true);
+        });
+
+        it('добавление и получение слов', () => {
+            const dictionary = new core.Dictionary();
+
+            dictionary.addWord("apple", "a fruit");
+            dictionary.addWord("car", "a vehicle");
+
+            const definition = dictionary.getDefinition("apple");
+            assert.strictEqual(definition, "a fruit");
+        });
+
+        it('проверка наличия слова', () => {
+            const dictionary = new core.Dictionary();
+
+            dictionary.addWord("apple", "a fruit");
+
+            assert.strictEqual(dictionary.hasWord("apple"), true);
+            assert.strictEqual(dictionary.hasWord("banana"), false);
+        });
+
+        it('удаление слова', () => {
+            const dictionary = new core.Dictionary();
+
+            dictionary.addWord("apple", "a fruit");
+            dictionary.addWord("car", "a vehicle");
+
+            dictionary.deleteWord("apple");
+            assert.strictEqual(dictionary.hasWord("apple"), false);
         });
     });
 });
