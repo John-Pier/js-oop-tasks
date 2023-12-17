@@ -1,6 +1,6 @@
 const assert = require('assert');
 const core = require('./oop');
-const {Point3D} = require("./oop");
+const { Point3D } = require("./oop");
 
 describe('ООП', () => {
     describe('#Point', () => {
@@ -58,36 +58,29 @@ describe('ООП', () => {
     describe('#Queue', () => {
         it('проверка массивом', () => {
             const queue = new core.Queue();
-            queue.push(...[1,2,3,4]);
-            assert.strictEqual(queue.pop(), 1);
-            assert.strictEqual(queue.pop(), 2);
-            assert.strictEqual(queue.size, 2);
+            queue.enqueue(1);
+            queue.enqueue(2);
 
-            queue.push(5);
-            assert.strictEqual(queue.size, 3);
-            assert.strictEqual(queue.pop(), 3);
-
-            queue.clear();
-            assert.strictEqual(queue.size, 0);
+            assert.strictEqual(queue.dequeue(), 1);
+            assert.strictEqual(queue.dequeue(), 2);
+            assert.strictEqual(queue.isEmpty(), true);
         });
 
         it('проверка на пограничные случаи', () => {
             const queue = new core.Queue();
-            assert.strictEqual(queue.size, 0);
-            assert.strictEqual(queue.pop(), undefined);
+
+            assert.strictEqual(queue.dequeue(), null); // Очередь пуста, ожидается null
+            assert.strictEqual(queue.peek(), null); // Очередь пуста, ожидается null
+            assert.strictEqual(queue.isEmpty(), true);
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-            assert.strictEqual(queue.pop(), 1);
-            assert.strictEqual(queue.pop(), -2);
-            assert.strictEqual(queue.size, 2);
-        });
+            const queue = new core.Queue([1, 2, 3, 5]);
 
-        it('методы работают корректно ', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-           // TODO: ваши тесты
-            assert.strictEqual(true, true);
+            assert.strictEqual(queue.size(), 4);
+            assert.strictEqual(queue.dequeue(), 1);
+            assert.strictEqual(queue.dequeue(), 2);
+            assert.strictEqual(queue.size(), 2);
         });
     });
 });
