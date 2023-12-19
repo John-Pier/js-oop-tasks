@@ -43,5 +43,27 @@ describe('es6', () => {
             // TODO
             assert.strictEqual(!!dic, true);
         });
+		
+		// Тесты
+		
+		it('Добавление и извлечение', () => {
+            
+			const dic = new core.Dictionary();
+            dic.addWord('word', 'def');
+            assert.strictEqual(dic.getDefinition('word'), 'def');
+			
+        });
+
+        it('Можно добавить только строки (string)', () => {
+            
+			const dic = new core.Dictionary();
+            dic.addWord(1, 'def');
+            assert.strictEqual(dic.getDefinition(1), undefined);
+            
+			dic.addWord('word', null);
+            assert.strictEqual(dic.getDefinition('word'), undefined);
+			
+        });
+
     });
 });

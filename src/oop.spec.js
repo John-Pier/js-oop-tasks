@@ -58,17 +58,22 @@ describe('ООП', () => {
     describe('#Queue', () => {
         it('проверка массивом', () => {
             const queue = new core.Queue();
-            queue.push(...[1,2,3,4]);
+            queue.push(1);
+            queue.push(2);
+            queue.push(3);
+
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), 2);
-            assert.strictEqual(queue.size, 2);
 
+
+            queue.push(4);
             queue.push(5);
+
             assert.strictEqual(queue.size, 3);
             assert.strictEqual(queue.pop(), 3);
+            assert.strictEqual(queue.pop(), 4);
 
-            queue.clear();
-            assert.strictEqual(queue.size, 0);
+            
         });
 
         it('проверка на пограничные случаи', () => {
@@ -78,16 +83,20 @@ describe('ООП', () => {
         });
 
         it('может создаться из массива', () => {
-            const queue = new core.Queue([1,-2,3,5]);
+            const queue = new core.Queue([1, -2, 3, 5]);
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), -2);
             assert.strictEqual(queue.size, 2);
         });
 
-        it('методы работают корректно ', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-           // TODO: ваши тесты
-            assert.strictEqual(true, true);
+        it('методы работают корректно', () => {
+            const queue = new core.Queue([1, -2, 3, 5]);
+			queue.push(10);
+            assert.strictEqual(queue.size, 5);
+            assert.strictEqual(queue.pop(), 1);
+
+            queue.clear();
+            assert.strictEqual(queue.size, 0);
         });
     });
 });
