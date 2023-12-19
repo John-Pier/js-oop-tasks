@@ -58,22 +58,23 @@ describe('ООП', () => {
     describe('#Queue', () => {
         it('проверка массивом', () => {
             const queue = new core.Queue();
-            queue.push(...[1,2,3,4]);
+            queue.push(...[1, 2, 3, 4]);
+
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), 2);
-            assert.strictEqual(queue.size, 2);
+            assert.strictEqual(queue.size(), 2);
 
             queue.push(5);
-            assert.strictEqual(queue.size, 3);
+            assert.strictEqual(queue.size(), 3);
             assert.strictEqual(queue.pop(), 3);
 
             queue.clear();
-            assert.strictEqual(queue.size, 0);
+            assert.strictEqual(queue.size(), 0);
         });
 
         it('проверка на пограничные случаи', () => {
             const queue = new core.Queue();
-            assert.strictEqual(queue.size, 0);
+            assert.strictEqual(queue.size(), 0);
             assert.strictEqual(queue.pop(), undefined);
         });
 
@@ -81,13 +82,41 @@ describe('ООП', () => {
             const queue = new core.Queue([1,-2,3,5]);
             assert.strictEqual(queue.pop(), 1);
             assert.strictEqual(queue.pop(), -2);
-            assert.strictEqual(queue.size, 2);
+            assert.strictEqual(queue.size(), 2);
         });
 
-        it('методы работают корректно ', () => {
-            const queue = new core.Queue([1,-2,3,5]);
-           // TODO: ваши тесты
-            assert.strictEqual(true, true);
+        it('должен перемещать элементы в конец очереди', () => {
+            const queue = new core.Queue();
+            queue.push(1);
+            queue.push(2);
+            assert.strictEqual(queue.size(), 2);
+        });
+
+        it('должен возвращать элементы из начала очереди', () => {
+            const queue = new core.Queue([1, 2, 3]);
+            const poppedItem = queue.pop();
+            assert.strictEqual(poppedItem, 1);
+            assert.strictEqual(queue.size(), 2);
+        });
+
+        it('должен вернуть правильный размер', () => {
+            const queue = new core.Queue([1, 2, 3]);
+            assert.strictEqual(queue.size(), 3);
+
+            queue.push(4);
+            assert.strictEqual(queue.size(), 4);
+
+            queue.pop();
+            assert.strictEqual(queue.size(), 3);
+
+            queue.clear();
+            assert.strictEqual(queue.size(), 0);
+        });
+
+        it('должен очистить очередь', () => {
+            const queue = new core.Queue([1, 2, 3]);
+            queue.clear();
+            assert.strictEqual(queue.size(), 0);
         });
     });
 });
