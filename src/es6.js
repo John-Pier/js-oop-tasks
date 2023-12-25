@@ -1,33 +1,61 @@
-"use strict";
-// в данных задачах нужно использовать возможности es6
-// ко всем заданиям можно (а местами и нужно) дописать свои тесты в файле es6.spec.js
-// Можно менять параметры функций (например сделать им значения по умолчанию)
+// 1
+function fioToName(fio) {
+  const [lastName, firstName] = fio.split(' ');
+  return `${firstName} ${lastName}`;
+}
 
-// Напишите функцию, которая принимает ФИО пользователя и возвращает
-// строку формата Имя Фамилия
-function fioToName(fio) {}
+// 2
+function filterUnique(array) {
+  return [...new Set(array)];
+}
 
-// преобразуйте массив чисел так, чтобы в нем остались только
-// уникальные элементы
-// присмотритесь к коллекции "Set"
-function filterUnique(array) {}
+// 3
+function calculateSalaryDifference(array) {
+  if (array.length === 0) {
+    return 0; // Предположим, что в случае пустого массива разница равна 0
+  }
 
-// Задача: разница зарплат
-// в функцию приходит массив из n зарплат сотрудников фирмы
-// ваша задача определить, во сколько раз зарплата самого высокооплачиваемого
-// сотрудника превышает зарплату самого низкооплачиваемого
-function calculateSalaryDifference(array) {}
+  const maxSalary = Math.max(...array);
+  const minSalary = Math.min(...array);
 
-// Реализуйте класс "словарь слов" (как толковый словарь)
-// класс должен быть безопасным и работать только со словами
-// присмотритесь к коллекции "Map"
-// Словарь - (string, string), и все это не null и не undefined
-// * покройте класс тестами
-class Dictionary {}
+  if (minSalary === 0) {
+    return Infinity; // Избегаем деления на ноль
+  }
+
+  return maxSalary / minSalary;
+}
+
+// 4
+class Dictionary {
+  constructor() {
+    this.wordsMap = new Map();
+  }
+
+  addWord(key, value) {
+    if (typeof key === 'string' && typeof value === 'string' && key !== '' && value !== '') {
+      this.wordsMap.set(key, value);
+    } else {
+      throw new Error('Ключ и значение должны быть строками и не могут быть пустыми.');
+    }
+  }
+
+  getWord(key) {
+    return this.wordsMap.get(key);
+  }
+
+  deleteWord(key) {
+    this.wordsMap.delete(key);
+  }
+
+  containsWord(key) {
+    return this.wordsMap.has(key);
+  }
+}
 
 module.exports = {
-    fioToName,
-    filterUnique,
-    Dictionary,
-    calculateSalaryDifference
+  fioToName,
+  filterUnique,
+  Dictionary,
+  calculateSalaryDifference,
 };
+
