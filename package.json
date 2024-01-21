@@ -8,7 +8,7 @@
     "prettier:write": "prettier -w src"
   },
   "dependencies": {
-    "mocha": "^10.1.0",
+    "mocha": "^10.2.0",
     "prettier": "^2.7.1"
   },
   "repository": {
